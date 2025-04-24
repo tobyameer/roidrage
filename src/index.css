@@ -49,3 +49,57 @@ code {
 .TiktokGradient:hover {
   background: linear-gradient(135deg, #25F4EE, #0000, #FE2C55);
 }
+
+.login-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #33010194;
+}
+.login-btn:hover{
+  color: #330101;
+}
+
+.login-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(215, 215, 215, 0.493);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.login-btn:hover::before {
+  left: 0;
+}
+
+.Signup-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 0;
+  background-color: #33010194;
+}
+.Signup-btn:hover{
+  color: #330101;
+}
+
+.Signup-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(215, 215, 215, 0.493);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.Signup-btn:hover::before {
+  left: 0;
+}
