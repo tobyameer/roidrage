@@ -2,7 +2,8 @@
 const express = require("express");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
-const verifyToken = require("../middleware/authMiddleware"); // assuming you have this middleware
+const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware"); // ✅ Fixed: Single import
+
 const router = express.Router();
 
 // ==========================

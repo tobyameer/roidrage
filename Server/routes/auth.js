@@ -29,7 +29,21 @@ router.post("/signup", async (req, res) => {
 
     await newCustomer.save();
 
-    res.status(201).json({ message: "User created successfully" });
+    // ✅ Generate JWT
+    const token = jwt.sign({ id: newCustomer._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    // ✅ Return token and user info
+    res.status(201).json({
+      message: "User created successfully",
+      token,
+      user: {
+        firstName: newCustomer.firstName,
+        lastName: newCustomer.lastName,
+        email: newCustomer.email,
+      },
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
