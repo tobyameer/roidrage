@@ -5,7 +5,12 @@ const CustomerSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true, // <-- speeds up findOne()
+    },
     password: { type: String, required: true },
     phoneNumber: { type: String },
     role: { type: String, default: "customer", enum: ["customer", "admin"] },

@@ -10,16 +10,18 @@ const router = express.Router();
 router.post("/signup", async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
-  try {
-    // Check if user already exists
-    const existingUser = await Customer.findOne({ email });
-    if (existingUser)
-      return res.status(400).json({ message: "User already exists" });
+  if (!firstName || !lastName || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
-    // Hash the password
+  try {
+    const existingUser = await Customer.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create and save new customer
     const newCustomer = new Customer({
       firstName,
       lastName,
@@ -29,12 +31,10 @@ router.post("/signup", async (req, res) => {
 
     await newCustomer.save();
 
-    // ✅ Generate JWT
     const token = jwt.sign({ id: newCustomer._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    // ✅ Return token and user info
     res.status(201).json({
       message: "User created successfully",
       token,
@@ -45,7 +45,7 @@ router.post("/signup", async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message }); // ✅ Consistent error key
   }
 });
 
@@ -55,18 +55,22 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
+  // ✅ Check for missing fields
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password are required" });
+  }
+
   try {
-    // Find the user by email
     const customer = await Customer.findOne({ email });
-    if (!customer)
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!customer) {
+      return res.status(400).json({ message: "invalid email or password." });
+    }
 
-    // Compare passwords
     const isMatch = await bcrypt.compare(password, customer.password);
-    if (!isMatch)
+    if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
+    }
 
-    // Generate JWT
     const token = jwt.sign({ id: customer._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -80,7 +84,7 @@ router.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: err.message }); // ✅ Use `message` key
   }
 });
 
