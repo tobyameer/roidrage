@@ -1,11 +1,16 @@
+// models/Product.js
+
 const mongoose = require("mongoose");
 
-const ProductSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  description: String,
   price: { type: Number, required: true },
-  stockQuantity: { type: Number, required: true },
-  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  description: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  category: { type: String, required: true },
+  image: { type: String }, // Stores the image path (relative URL)
 });
 
-module.exports = mongoose.model("Product", ProductSchema);
+const Product = mongoose.model("Product", productSchema);
+
+module.exports = Product;

@@ -1,40 +1,62 @@
 // routes/product.js
+
 const express = require("express");
 const Product = require("../models/Product");
-const { verifyToken, requireAdmin } = require("../middleware/auth");
+const multer = require("multer");
+const { verifyToken, verifyAdmin } = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-// Create product (admin only)
-router.post("/", verifyToken, requireAdmin, async (req, res) => {
-  const product = new Product(req.body);
-  await product.save();
-  res.status(201).json(product);
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Save files to 'uploads' directory
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname); // Ensure unique filenames
+  },
 });
 
-// Update product (admin only)
-router.put("/:id", verifyToken, requireAdmin, async (req, res) => {
-  const updated = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-  res.json(updated);
-});
+const upload = multer({ storage });
 
-// Delete product (admin only)
-router.delete("/:id", verifyToken, requireAdmin, async (req, res) => {
-  await Product.findByIdAndDelete(req.params.id);
-  res.json({ message: "Product deleted" });
-});
-
-// Get all products
+// Fetch all products
 router.get("/", async (req, res) => {
-  const products = await Product.find().populate("category");
-  res.json(products);
+  try {
+    const products = await Product.find();
+    res.status(200).json(products);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch products" });
+  }
 });
 
-// ✅ Get products by category ID
-router.get("/category/:categoryId", async (req, res) => {
-  const products = await Product.find({ category: req.params.categoryId });
-  res.json(products);
-});
+// Add new product (with image upload)
+router.post(
+  "/",
+  verifyToken,
+  verifyAdmin,
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const { name, price, description, quantity, category } = req.body;
+      const image = req.file ? `/uploads/${req.file.filename}` : null;
+
+      const newProduct = new Product({
+        name,
+        price,
+        description,
+        quantity,
+        category,
+        image,
+      });
+
+      await newProduct.save();
+      res.status(201).json(newProduct);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Failed to create product" });
+    }
+  }
+);
 
 module.exports = router;

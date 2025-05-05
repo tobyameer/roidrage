@@ -1,10 +1,7 @@
-// middleware/authMiddleware.js
-
-const jwt = require("jsonwebtoken");
-const User = require("../models/Customer");
-
 const verifyToken = (req, res, next) => {
-  const token = req.header("x-auth-token");
+  const authHeader = req.header("Authorization");
+  const token = authHeader && authHeader.split(" ")[1]; // Get token after 'Bearer'
+
   if (!token) {
     return res.status(401).json({ message: "No token, authorization denied" });
   }
@@ -17,13 +14,3 @@ const verifyToken = (req, res, next) => {
     res.status(401).json({ message: "Token is not valid" });
   }
 };
-
-const verifyAdmin = async (req, res, next) => {
-  const user = await User.findById(req.user.id);
-  if (user.role !== "admin") {
-    return res.status(403).json({ message: "Admin privileges required" });
-  }
-  next();
-};
-
-module.exports = { verifyToken, verifyAdmin };

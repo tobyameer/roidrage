@@ -4,6 +4,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
+// Import your product routes here
+const productRoutes = require("./routes/product");
+
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -20,6 +23,8 @@ app.use(express.json());
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
+app.use("/uploads", express.static("uploads"));
+
 const orderRoutes = require("./routes/order");
 app.use("/api", orderRoutes);
 
@@ -28,6 +33,9 @@ app.use("/api/seed", seedAdminRoute);
 
 const privateRoutes = require("./routes/private");
 app.use("/api", privateRoutes);
+
+// Add the product routes here
+app.use("/api/products", productRoutes); // This line is crucial for handling the /api/products endpoint
 
 // Root Route
 app.get("/", (req, res) => {
