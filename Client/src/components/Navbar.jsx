@@ -1,68 +1,122 @@
 import React, { useState, useEffect } from "react";
-import { FaUser } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaUser, FaShoppingCart } from "react-icons/fa";
 import logo from "../images/logo.gif";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import Cart from "./Cart/Cart";
 
 const Navbar = () => {
   const [isVisible, setVisibility] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
-  const [nav, setNav] = useState(false);
+  const [role, setRole] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 50); // Navbar becomes sticky after scrolling past 50px
-      setNav(window.scrollY > 780); // Navbar becomes sticky after scrolling past 50px
+      setIsSticky(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClick = () => {
-    setVisibility(true);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setRole(decoded.role);
+      } catch (err) {
+        console.error("Invalid token");
+        setRole(null);
+      }
+    }
+  }, []);
+
+  const handleClick = () => setVisibility(true);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setRole(null);
+    navigate("/login");
   };
+
   return (
-    <div
-      className={`w-screen text-white fixed z-[9]  h-[100px] flex justify-between items-center transition-all duration-500  ${
-        isSticky
-          ? "top-0  bg-black/80 text-white"
-          : "top-[50px] bg-transparent "
-      }`}
-    >
-      <div className="w-[100%] mx-[30px] h-[100px] flex justify-between items-center">
-        <div className="flex gap-5 w-[350px]">
-          <Link to="/">
-            <button className="w-[100px] text-[20px] h-[70px]">Home</button>
-          </Link>
-          <Link to="/shop">
-            <button className="w-[100px] text-[20px] h-[70px]">Shop</button>
-          </Link>
-          <Link>
+    <div className="top-0 fixed z-[9]">
+      <div className="relative  h-[50px] bg-white text-black text-[17px] font-semibold flex items-center justify-center">
+        <h3>Order Now Free Shipping!</h3>
+      </div>
+      <div
+        className={
+          "w-screen text-white  h-[150px] flex justify-between items-center transition-all duration-500 bg-black"
+        }
+      >
+        <div className="w-full mx-[30px] h-[100px] flex justify-between items-center">
+          {/* Left Nav */}
+          <div className="flex gap-5 w-[350px]">
+            <Link to="/">
+              <button className="w-[100px] text-[20px] h-[70px] font-semibold">
+                Home
+              </button>
+            </Link>
+            <Link to="/shop">
+              <button className="w-[100px] text-[20px] h-[70px] font-semibold">
+                Shop
+              </button>
+            </Link>
+            {/* <Link>
             <button className="w-[100px] text-[20px] h-[70px]">About Us</button>
-          </Link>
-        </div>
-        <div className=" text-center w-[350px]">
-          <div className="flex justify-center items-center">
-            <img
-              src={logo}
-              alt="Animated GIF"
-              className="w-[150px] h-[150px] object-cover"
-            />
+            </Link> */}
           </div>
+
+          {/* Center Logo */}
+          <div className="text-center w-[350px]">
+            <div className="flex justify-center items-center">
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-[150px] h-[150px] object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Right Nav */}
+          <div className="flex gap-7 w-[350px] items-center justify-end pr-[50px]">
+            {/* Cart visible to all users */}
+            <FaShoppingCart
+              size={20}
+              onClick={handleClick}
+              className="cursor-pointer"
+            />
+
+            {/* Show admin link if admin */}
+            {role === "admin" && (
+              <Link to="/admin">
+                <button className="text-[16px]">Admin Panel</button>
+              </Link>
+            )}
+
+            {/* Show profile if user */}
+            {role === "user" && (
+              <Link to="/profile">
+                <FaUser size={20} className="cursor-pointer" />
+              </Link>
+            )}
+
+            {/* Show Login/Logout based on auth */}
+            {!role ? (
+              <Link to="/login">
+                <FaUser size={20} />
+              </Link>
+            ) : (
+              <button onClick={logout} className=" text-[16px]">
+                Logout
+              </button>
+            )}
+          </div>
+          <Cart isVisible={isVisible} setVisibility={setVisibility} />
         </div>
-        <div className="flex gap-7 w-[350px] items-center justify-end pr-[50px]">
-          <FaShoppingCart
-            size={20}
-            onClick={handleClick}
-            className="cursor-pointer"
-          />
-          <Link to="/profile">
-            <FaUser size={20} />
-          </Link>
-        </div>
-        <Cart isVisible={isVisible} setVisibility={setVisibility} />
       </div>
     </div>
   );

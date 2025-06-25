@@ -14,45 +14,37 @@ const Signup = () => {
   const navigate = useNavigate(); // 🔁 Used to navigate programmatically after signup
   const { login } = useAuth(); // 🔐 Get login method from AuthContext to set user/token
 
-  const handleClick = async (e) => {
-    e.preventDefault(); // 🚫 Prevent form from reloading the page
-    setErrorMessage(""); // 🧹 Clear any previous errors
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setErrorMessage(""); // Clear previous errors
 
+    // Frontend validation
     if (!email || !password || !firstName || !lastName) {
-      setErrorMessage("fill required fields");
+      setErrorMessage("Fill all required fields");
       return;
     }
 
     try {
-      // 📤 Send signup data to the backend
-      const res = await axios.post(
-        "http://localhost:4000/api/auth/signup",
-        {
-          firstName,
-          lastName,
-          email,
-          password,
-        },
-        { withCredentials: true } // only if your backend sets cookies
-      );
+      const res = await axios.post("http://localhost:4000/api/auth/signup", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
 
-      // ✅ Destructure the token and user info from the response
       const { token, user } = res.data;
-
       if (token && user) {
-        // 🟢 Log the user in using context
-        login(user, token);
-        console.log("New user created:", user);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
-        // 🏠 Redirect to home page after successful signup
-        navigate("/");
+        // Store user role
+
+        console.log("Signed up user:", user);
+        navigate("/", { state: { user } });
       } else {
-        // ⚠️ Edge case: Backend didn't return expected data
-        setErrorMessage("Signup failed: No user or token returned");
+        setErrorMessage("User creation failed.");
       }
     } catch (error) {
-      // ❌ Handle any errors from the backend or network
-      console.log(error.response?.data); // 👈 log the real issue
       setErrorMessage(error.response?.data?.message || "Signup failed");
     }
   };
@@ -69,6 +61,7 @@ const Signup = () => {
               className="text-[25px] pl-5 w-full h-[50px] active:border active:border-gray-400 bg-gray-300/10 rounded-sm"
               type="text"
               placeholder="First Name"
+              value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
 
@@ -77,6 +70,7 @@ const Signup = () => {
               className="text-[25px] pl-5 w-full h-[50px] border-gray-600 bg-gray-300/10 rounded-sm"
               type="text"
               placeholder="Last Name"
+              value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
 
@@ -85,6 +79,7 @@ const Signup = () => {
               className="text-[25px] pl-5 w-full h-[50px] border-gray-600 bg-gray-300/10 rounded-sm"
               type="text"
               placeholder="E-mail"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
@@ -93,12 +88,20 @@ const Signup = () => {
               className="text-[25px] pl-5 w-full h-[50px] border-gray-600 bg-gray-300/10 rounded-sm"
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              className="text-[25px] pl-5 w-full h-[50px] border-gray-600 bg-gray-300/10 rounded-sm"
+              type="password"
+              placeholder="Password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
 
             {/* 🔘 Submit button */}
             <button
-              onClick={handleClick}
+              onClick={handleSignup} // Changed to use handleSignup
               className="Signup-btn w-full h-[50px] text-[25px]"
             >
               CREATE ACCOUNT

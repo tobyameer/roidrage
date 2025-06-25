@@ -19,9 +19,12 @@ const AdminNavbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClick = () => {
-    setVisibility(true);
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/login"; // or use navigate() if inside a component
   };
+
   return (
     <div
       className={`w-screen text-white fixed z-[9]  h-[100px] flex justify-between items-center transition-all duration-500  ${
@@ -34,9 +37,6 @@ const AdminNavbar = () => {
         <div className="flex gap-5 w-[350px]">
           <Link to="/admin">
             <button className="w-[100px] text-[20px] h-[70px]">Home</button>
-          </Link>
-          <Link to="/shop">
-            <button className="w-[100px] text-[20px] h-[70px]">Shop</button>
           </Link>
           {/* <Link>
             <button className="w-[100px] text-[20px] h-[70px]">About Us</button>
@@ -60,6 +60,9 @@ const AdminNavbar = () => {
               Categories
             </button>
           </Link>
+          <button onClick={logout} className="text-red-500">
+            Logout
+          </button>
           {/* <FaShoppingCart
             size={20}
             onClick={handleClick}

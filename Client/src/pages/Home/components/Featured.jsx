@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import f1 from "../../../images/featured1.jpg";
 import f2 from "../../../images/featured2.jpg";
 import f3 from "../../../images/featured3.jpg";
 import { FaArrowUp } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -10,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Featured = () => {
   const featuredWrapper = useRef(null);
+  const [hover, setHover] = useState(0);
 
   useEffect(() => {
     const wrapper = featuredWrapper.current;
@@ -53,44 +55,81 @@ const Featured = () => {
     });
   }, []);
 
+  const handleHover = (e) => {
+    setHover(e);
+  };
+
   return (
-    <div className="my-[500px]">
-      <div className="mb-[100px] mt-[500px] flex items-center">
-        <h1 className="pl-[100px] text-white text-[40px] font-medium">
-          FEATURED
-        </h1>
+    <div className="my-[400px] bg-red-900/14 border-gray-800/20 border-y-2">
+      <div className="mb-[100px]  flex flex-col items-center justify-center">
+        <h1 className=" text-white text-[45px] font-semibold ">FEATURED</h1>
       </div>
-      <div className="w-screen flex justify-center">
+      <div className="w-screen flex flex-col justify-center items-center">
         <div className="flex w-fit mx-[50px] relative" ref={featuredWrapper}>
           {/* Image 1 */}
-          <div className="featured-item relative w-[33%]">
+          <Link
+            to="/shop"
+            onMouseEnter={(e) => handleHover(1)}
+            onMouseLeave={(e) => handleHover(0)}
+            className="featured-item relative w-[33%]"
+          >
             <img src={f1} alt="" className="w-full object-cover h-[600px]" />
-            <div className="absolute bottom-0 w-full h-[80px] bg-black/40 flex items-center justify-center">
+            <div
+              className={
+                hover == 1
+                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+              }
+            >
               <p className="text-white font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Image 2 */}
-          <div className="featured-item relative w-[33%]">
+          <Link
+            onMouseEnter={(e) => handleHover(2)}
+            onMouseLeave={(e) => handleHover(0)}
+            to="/shop"
+            className="featured-item relative w-[33%]"
+          >
             <img src={f2} alt="" className="w-full object-cover h-[600px]" />
-            <div className="absolute bottom-0 w-full h-[80px] bg-black/40 flex items-center justify-center">
+            <div
+              className={
+                hover == 2
+                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+              }
+            >
+              {" "}
               <p className="text-white font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Image 3 */}
-          <div className="featured-item relative w-[33%]">
+          <Link
+            onMouseEnter={(e) => handleHover(3)}
+            onMouseLeave={(e) => handleHover(0)}
+            to="/shop"
+            className="featured-item relative w-[33%]"
+          >
             <img src={f3} alt="" className="w-full object-cover h-[600px]" />
-            <div className="absolute bottom-0 w-full h-[80px] bg-black/40 flex items-center justify-center">
+            <div
+              className={
+                hover == 3
+                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out  bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+              }
+            >
+              {" "}
               <p className="text-white font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

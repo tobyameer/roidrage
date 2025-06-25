@@ -59,4 +59,6 @@ router.post(
   }
 );
 
+// Delete a customer (admin only)
+
 module.exports = router;

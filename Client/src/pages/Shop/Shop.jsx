@@ -66,12 +66,9 @@ const Shop = () => {
               ref={shop}
             >
               {[arrival1, arrival2, arrival3, arrival4].map((src, i) => (
-                <Link to="/product">
+                <Link key={i} to={`/product/${i}`}>
                   <div
-                    key={i}
-                    onClick={(e) => {
-                      setSelectedItem(i);
-                    }}
+                    onClick={() => setSelectedItem(i)}
                     className="cursor-pointer shop-item flex text-white flex-col will-change-transform will-change-opacity"
                   >
                     <img

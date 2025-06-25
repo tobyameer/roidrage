@@ -67,6 +67,8 @@ const AdminProducts = () => {
     }
   };
 
+  const handleDelete = () => {};
+
   return (
     <div>
       <AdminNavbar />
@@ -163,7 +165,8 @@ const AdminProducts = () => {
           {products.map((product) => (
             <div
               key={product._id}
-              className="p-4 border border-gray-300 rounded-md bg-white shadow"
+              onClick={handleDelete}
+              className="p-4 border border-gray-300 rounded-md hover:bg-red-500/40 bg-white shadow"
             >
               {/* Display product image */}
               <img

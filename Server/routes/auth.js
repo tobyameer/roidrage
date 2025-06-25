@@ -8,7 +8,7 @@ const router = express.Router();
 // SIGNUP Route
 // ==========================
 router.post("/signup", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
 
   if (!firstName || !lastName || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
@@ -27,13 +27,16 @@ router.post("/signup", async (req, res) => {
       lastName,
       email,
       password: hashedPassword,
+      role: role || "customer", // Default to "customer" if no role is provided
     });
 
     await newCustomer.save();
 
-    const token = jwt.sign({ id: newCustomer._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { id: newCustomer._id, email: newCustomer.email, role: newCustomer.role }, // Include the role
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
     res.status(201).json({
       message: "User created successfully",
@@ -42,6 +45,7 @@ router.post("/signup", async (req, res) => {
         firstName: newCustomer.firstName,
         lastName: newCustomer.lastName,
         email: newCustomer.email,
+        role: newCustomer.role, // Include role here as well
       },
     });
   } catch (err) {
@@ -55,7 +59,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  // ✅ Check for missing fields
+  // ✅ Validate input
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
@@ -63,28 +67,33 @@ router.post("/login", async (req, res) => {
   try {
     const customer = await Customer.findOne({ email });
     if (!customer) {
-      return res.status(400).json({ message: "invalid email or password." });
+      return res.status(400).json({ message: "Invalid email or password." });
     }
 
     const isMatch = await bcrypt.compare(password, customer.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Invalid email or password." });
     }
 
-    const token = jwt.sign({ id: customer._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    // ✅ Create token with role included
+    const token = jwt.sign(
+      { id: customer._id, email: customer.email, role: customer.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
 
+    // ✅ Send role back in user object
     res.status(200).json({
       token,
       user: {
         firstName: customer.firstName,
         lastName: customer.lastName,
         email: customer.email,
+        role: customer.role, // 👈 send this
       },
     });
   } catch (err) {
-    res.status(500).json({ message: err.message }); // ✅ Use `message` key
+    res.status(500).json({ message: err.message });
   }
 });
 

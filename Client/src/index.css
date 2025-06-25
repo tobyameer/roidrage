@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+/* ✅ Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Electrolize&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Michroma&family=Oswald:wght@200..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
+/* ✅ Base styles */
 html {
   scroll-behavior: smooth;
 }
@@ -11,12 +13,13 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(45deg, #360000, #000000, #360000);
+  background: linear-gradient(45deg, #930e0e, #000000, #360000);
   background-size: 400% 400%;
   animation: gradientAnimation 5s ease infinite;
   color: white;
-  font-family: 'Rubik', sans-serif; /* Optional, add your preferred font */
+  font-family: 'Michroma', sans-serif; /* Add fallback */
 }
+
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -36,58 +39,37 @@ body {
   z-index: 1;
 }
 
+/* ✅ Code font fallback */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Ensuring the hover effects do not affect the background and maintain its consistency */
+/* ✅ Social Button Hover Effects */
 .IgGradient:hover {
-  background: #833ab4;
   background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
 }
 
 .TiktokGradient:hover {
-  background: linear-gradient(135deg, #25F4EE, #0000, #FE2C55);
+  background: linear-gradient(135deg, #25F4EE, transparent, #FE2C55);
 }
 
-.login-btn {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  z-index: 0;
-  background-color: #33010194;
-}
-.login-btn:hover{
-  color: #330101;
-}
-
-.login-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(215, 215, 215, 0.493);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.login-btn:hover::before {
-  left: 0;
-}
-
+/* ✅ Button Hover Animations */
+.login-btn,
 .Signup-btn {
   position: relative;
   overflow: hidden;
   cursor: pointer;
   z-index: 0;
   background-color: #33010194;
+  transition: color 0.3s ease;
 }
-.Signup-btn:hover{
+
+.login-btn:hover,
+.Signup-btn:hover {
   color: #330101;
 }
 
+.login-btn::before,
 .Signup-btn::before {
   content: '';
   position: absolute;
@@ -100,6 +82,7 @@ code {
   z-index: -1;
 }
 
+.login-btn:hover::before,
 .Signup-btn:hover::before {
   left: 0;
 }

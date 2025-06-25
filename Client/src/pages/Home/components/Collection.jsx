@@ -1,89 +1,68 @@
 import React, { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import arrival1 from "../../../images/arrival1.jpg";
 import arrival2 from "../../../images/arrival2.jpg";
 import arrival3 from "../../../images/arrival3.jpg";
 import arrival4 from "../../../images/arrival4.jpg";
+import arrival5 from "../../../images/arrival5.jpg";
+import arrival6 from "../../../images/arrival6.jpg";
+import arrival7 from "../../../images/arrival7.jpg";
+import arrival8 from "../../../images/arrival8.jpg";
+import { FaStar } from "react-icons/fa";
+import { FaStarHalf } from "react-icons/fa";
 
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import JoinUs from "./JoinUs";
 gsap.registerPlugin(ScrollTrigger);
 
 const Collection = () => {
   const collection = useRef(null);
 
-  useEffect(() => {
-    const items = collection.current?.querySelectorAll(".collection-item");
-
-    if (!items || items.length === 0) return;
-
-    // ✅ Fade in earlier and finish earlier
-    gsap.fromTo(
-      items,
-      {
-        opacity: 0,
-        y: 80,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        ease: "expo.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: collection.current,
-          start: "top 70%", // ✅ Starts earlier (when 15% of section is in view)
-          end: "top 30%", // ✅ Ends before the whole section is scrolled into view
-          scrub: 1.5,
-          markers: false,
-        },
-      }
-    );
-
-    // ✅ Fade out later (after user scrolls past it)
-    gsap.to(collection.current, {
-      opacity: 0,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: collection.current,
-        start: "center center", // ✅ Don't fade out until bottom hits bottom of viewport
-        end: "bottom top", // ✅ Fully fades out after it scrolls past
-        scrub: 1.5,
-        markers: false,
-      },
-    });
-  }, []);
+  const images = [
+    arrival1,
+    arrival2,
+    arrival3,
+    arrival4,
+    arrival5,
+    arrival6,
+    arrival7,
+    arrival8,
+  ];
 
   return (
-    <div>
-      <div className="mb-[100px] mt-[500px] flex items-center">
-        <h1 className="pl-[100px] text-white text-[40px] font-medium">
-          NEW ARRIVALS
-        </h1>
-      </div>
-      <div>
-        <div className="w-screen flex justify-center">
-          <div
-            className="mx-[50px] grid grid-cols-2 xl:grid-cols-4 gap-y-20 gap-10 lg:gap-10"
-            ref={collection}
-          >
-            {[arrival1, arrival2, arrival3, arrival4].map((src, i) => (
-              <div
-                key={i}
-                className="collection-item flex text-white flex-col will-change-transform will-change-opacity"
-              >
+    <div className="bg-black pt-[50px] mb-[500px]">
+      <div className="w-screen flex justify-center">
+        <div
+          className="mx-[50px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-20 gap-10"
+          ref={collection}
+        >
+          {images.map((src, i) => (
+            <Link to={`/product/arrival${i + 1}`} key={i}>
+              <div className="collection-item flex text-white text-[22px] flex-col will-change-transform will-change-opacity cursor-pointer text-center">
                 <img
                   src={src}
-                  alt=""
+                  alt={`Arrival ${i + 1}`}
                   className="w-full h-[600px] object-cover"
                 />
                 <div className="my-5">
-                  <h2 className="font-medium">Summer Season</h2>
-                  <p>499 EGP</p>
+                  <h2 className="">Summer Season</h2>
+                  <p className="text-[15px] my-1">$99.99</p>
+                  <div className="flex justify-center">
+                    <FaStar style={{ color: "white" }} />
+                    <FaStar style={{ color: "white" }} />
+                    <FaStar style={{ color: "white" }} />
+                    <FaStar style={{ color: "white" }} />
+                    <FaStar style={{ color: "white" }} />
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </Link>
+          ))}
         </div>
       </div>
+      <JoinUs />
     </div>
   );
 };
