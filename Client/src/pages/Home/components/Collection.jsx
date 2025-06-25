@@ -32,7 +32,7 @@ const Collection = () => {
   ];
 
   return (
-    <div className="bg-black pt-[50px] mb-[500px]">
+    <div className="bg-white  pt-[50px] mb-[500px]">
       <div className="w-screen flex justify-center">
         <div
           className="mx-[50px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-20 gap-10"
@@ -46,7 +46,7 @@ const Collection = () => {
                   alt={`Arrival ${i + 1}`}
                   className="w-full h-[600px] object-cover"
                 />
-                <div className="my-5">
+                <div className="text-black my-5">
                   <h2 className="">Summer Season</h2>
                   <p className="text-[15px] my-1">$99.99</p>
                   <div className="flex justify-center">

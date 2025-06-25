@@ -45,6 +45,9 @@ const Home = () => {
           <span className="absolute inset-0 bg-black transition-transform duration-300 ease-in-out group-hover:-translate-x-full"></span>
         </button>
       </div>
+      <div className="my-[200px]  flex justify-center">
+        <h1 className=" text-white text-[45px] font-semibold ">FEATURED</h1>
+      </div>
       <Featured />
       <div className="my-[200px] flex justify-center ">
         <h1 className="text-white text-[45px] font-semibold">NEW ARRIVALS</h1>
