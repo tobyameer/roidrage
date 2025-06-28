@@ -32,7 +32,7 @@ const Collection = () => {
   ];
 
   return (
-    <div className="relative bg-white pt-[25px] lg:pt-[50px] pb-[200px] lg:mb-[500px]">
+    <div className="mb-[300px] pb-[150px] relative bg-white pt-[25px] lg:pt-[50px]  lg:mb-[500px]">
       <div className="w-screen flex justify-center">
         <div
           className="mx-[15px] lg:mx-[50px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-y-20 lg:gap-10"

@@ -3,7 +3,7 @@ import image from "../../../images/hero.jpg";
 
 const JoinUs = () => {
   return (
-    <div className="absolute bottom-[-10%] lg:mx-[20%] right-0 left-0 mx-[15px] mt-[150px] h-[250px] flex items-center justify-center bg-black rounded-2xl overflow-hidden">
+    <div className="mb-[80px] absolute bottom-[-15%] lg:mx-[20%] right-0 left-0 mx-[15px] mt-[150px] h-[250px] flex items-center justify-center bg-black rounded-2xl overflow-hidden">
       {/* Scope effect container */}
       <div className="relative w-screen  h-screen rounded-2xl overflow-hidden">
         <img

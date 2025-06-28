@@ -3,6 +3,10 @@ import arrival1 from "../../images/arrival1.jpg";
 import arrival2 from "../../images/arrival2.jpg";
 import arrival3 from "../../images/arrival3.jpg";
 import arrival4 from "../../images/arrival4.jpg";
+import arrival5 from "../../images/arrival5.jpg";
+import arrival6 from "../../images/arrival6.jpg";
+import arrival7 from "../../images/arrival7.jpg";
+import arrival8 from "../../images/arrival8.jpg";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -59,26 +63,37 @@ const Shop = () => {
     <div>
       <Navbar />
       <div>
-        <div className="mb-[100px] mt-[500px] ">
+        <div className="mt-[120px] lg:mt-[200px]">
           <div className="w-screen flex justify-center">
             <div
-              className="mx-[50px] grid grid-cols-2 xl:grid-cols-4 gap-y-20 gap-10 lg:gap-10"
+              className="lg:mx-[50px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-y-20 lg:gap-10"
               ref={shop}
             >
-              {[arrival1, arrival2, arrival3, arrival4].map((src, i) => (
+              {[
+                arrival1,
+                arrival2,
+                arrival3,
+                arrival4,
+                arrival5,
+                arrival6,
+                arrival6,
+                arrival8,
+              ].map((src, i) => (
                 <Link key={i} to={`/product/${i}`}>
                   <div
                     onClick={() => setSelectedItem(i)}
-                    className="cursor-pointer shop-item flex text-white flex-col will-change-transform will-change-opacity"
+                    className="collection-item flex text-white text-[12px] lg:text-[22px] flex-col will-change-transform will-change-opacity cursor-pointer text-center"
                   >
                     <img
                       src={src}
                       alt=""
-                      className="w-full h-[600px] object-cover"
+                      className="w-full h-[300px] lg:h-[600px] object-cover"
                     />
-                    <div className="my-5 flex flex-col items-center justify-center ">
-                      <h2 className="text-[25px]">Summer Season</h2>
-                      <p className="text-[17px] text-gray-400">499 EGP</p>
+                    <div className=" my-2 lg:my-5 flex flex-col items-center justify-center ">
+                      <h2 className="">Summer Season</h2>
+                      <p className="text-[10px] lg:text-[15px] lg:my-1">
+                        $99.99
+                      </p>
                     </div>
                   </div>
                 </Link>

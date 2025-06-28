@@ -53,14 +53,14 @@ const Navbar = () => {
       <div
         className={`px-[20px] text-white h-[70px] lg:h-[150px] flex items-center duration-500 bg-black`}
       >
-        <div className="flex justify-between items-center w-full mx-[1px] lg:mx-[50px]">
+        <div className="flex justify-around  items-center w-full lg:mx-[50px]">
           {/* Left Nav */}
           <div className="flex gap-5">
             <Link to="/">
-              <h1 className="text-[12px] lg:text-[20px] font-semibold">Home</h1>
+              <h1 className="text-[10px] lg:text-[20px] font-semibold">Home</h1>
             </Link>
             <Link to="/shop">
-              <h1 className="text-[12px] lg:text-[20px] font-semibold">Shop</h1>
+              <h1 className="text-[10px] lg:text-[20px] font-semibold">Shop</h1>
             </Link>
           </div>
 
