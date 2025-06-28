@@ -5,7 +5,7 @@ import { AiFillTikTok } from "react-icons/ai";
 
 const Footer = () => {
   return (
-    <div className="mt-[150px] lg:mt-[350px] w-screen flex flex-col items-center">
+    <div className=" mt-[150px]  lg:mt-[350px] w-screen flex flex-col items-center">
       {/* Logo Centered */}
       <img src={logoWhite} alt="" className="w-[35px] lg:w-[80px]" />
 
