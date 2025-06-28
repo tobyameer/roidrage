@@ -35,11 +35,13 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Section (No Motion, Full 100vh) */}
-      <div
-        className="flex justify-center items-center  h-screen bg-center bg-no-repeat bg-cover"
-        style={{ backgroundImage: `url(${image})` }}
-        ref={heroBackground}
-      >
+      <div className="w-screen h-screen flex justify-center items-center">
+        <img
+          src={image}
+          alt="hero"
+          className="w-full h-full object-cover"
+          ref={heroBackground}
+        />
         <button className="relative overflow-hidden group text-white text-[15px] lg:text-[35px] px-4 py-2 font-semibold bg-black/30 w-[150px] lg:w-[300px] h-[50px] lg:h-[100px] border-[3px] border-black duration-200">
           <span className="relative z-10">Shop Now</span>
           <span className="absolute inset-0 bg-black transition-transform duration-300 ease-in-out group-hover:-translate-x-full"></span>
