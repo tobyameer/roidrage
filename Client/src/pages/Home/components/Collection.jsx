@@ -32,23 +32,23 @@ const Collection = () => {
   ];
 
   return (
-    <div className="bg-white  pt-[50px] mb-[500px]">
+    <div className="relative bg-white pt-[25px] lg:pt-[50px] pb-[200px] lg:mb-[500px]">
       <div className="w-screen flex justify-center">
         <div
-          className="mx-[50px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-20 gap-10"
+          className="mx-[15px] lg:mx-[50px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-y-20 lg:gap-10"
           ref={collection}
         >
           {images.map((src, i) => (
             <Link to={`/product/arrival${i + 1}`} key={i}>
-              <div className="collection-item flex text-white text-[22px] flex-col will-change-transform will-change-opacity cursor-pointer text-center">
+              <div className="collection-item flex text-white text-[12px] lg:text-[22px] flex-col will-change-transform will-change-opacity cursor-pointer text-center">
                 <img
                   src={src}
                   alt={`Arrival ${i + 1}`}
-                  className="w-full h-[600px] object-cover"
+                  className="w-full h-[300px] lg:h-[600px] object-cover"
                 />
-                <div className="text-black my-5">
-                  <h2 className="">Summer Season</h2>
-                  <p className="text-[15px] my-1">$99.99</p>
+                <div className="text-black my-2 lg:my-5">
+                  <h2>Summer Season</h2>
+                  <p className="text-[10px] lg:text-[15px] lg:my-1">$99.99</p>
                   <div className="flex justify-center">
                     <FaStar style={{ color: "white" }} />
                     <FaStar style={{ color: "white" }} />

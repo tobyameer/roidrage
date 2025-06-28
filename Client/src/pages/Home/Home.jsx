@@ -36,21 +36,25 @@ const Home = () => {
 
       {/* Hero Section (No Motion, Full 100vh) */}
       <div
-        className="flex justify-center items-center mt-[200px] h-screen bg-center bg-no-repeat bg-cover"
+        className="flex justify-center items-center  h-screen bg-center bg-no-repeat bg-cover"
         style={{ backgroundImage: `url(${image})` }}
         ref={heroBackground}
       >
-        <button className="relative overflow-hidden group text-white text-[35px] px-4 py-2 font-semibold bg-black/30 w-[300px] h-[100px] border-[3px] border-black duration-200">
+        <button className="relative overflow-hidden group text-white text-[15px] lg:text-[35px] px-4 py-2 font-semibold bg-black/30 w-[150px] lg:w-[300px] h-[50px] lg:h-[100px] border-[3px] border-black duration-200">
           <span className="relative z-10">Shop Now</span>
           <span className="absolute inset-0 bg-black transition-transform duration-300 ease-in-out group-hover:-translate-x-full"></span>
         </button>
       </div>
-      <div className="my-[200px]  flex justify-center">
-        <h1 className=" text-white text-[45px] font-semibold ">FEATURED</h1>
+      <div className="my-[100px] g:my-[200px]  flex justify-center">
+        <h1 className=" text-white text-[25px] lg:text-[45px] font-semibold ">
+          FEATURED
+        </h1>
       </div>
       <Featured />
-      <div className="my-[200px] flex justify-center ">
-        <h1 className="text-white text-[45px] font-semibold">NEW ARRIVALS</h1>
+      <div className="my-[100px] lg:my-[200px]  flex justify-center">
+        <h1 className=" text-white text-[25px] lg:text-[45px] font-semibold ">
+          NEW ARRIVALS
+        </h1>
       </div>
       <Collection />
       <Footer />

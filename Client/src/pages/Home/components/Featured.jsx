@@ -63,15 +63,18 @@ const Featured = () => {
       to="/shop"
       className="featured-item relative w-[33%]"
     >
-      <img src={f3} alt="" className="w-full object-cover h-[600px]" />
+      <img
+        src={f3}
+        alt=""
+        className="w-full object-cover h-[300px] md:h-[600px]"
+      />
       <div
         className={
           hover == 3
-            ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out  bg-black/40 flex items-center justify-center"
-            : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+            ? "absolute bottom-0 w-full h-full text-[15px] md:text-[28px] duration-300 ease-in-out  bg-black/40 flex items-center justify-center"
+            : "absolute bottom-0 w-full h-[40px] md:h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
         }
       >
-        {" "}
         <p className="text-white font-semibold flex items-center gap-2">
           Shop <FaArrowUp />
         </p>
@@ -81,10 +84,10 @@ const Featured = () => {
   };
 
   return (
-    <div className="mb-[400px] py-[50px] bg-red-900/14  border-gray-800/20 border-y-2">
+    <div className="md:mb-[400px] py-[25px] md:py-[50px] bg-red-900/14  border-gray-800/20 border-y-2">
       <div className="w-screen flex flex-col justify-center items-center">
         <div
-          className="p-[1rem] flex w-fit  mx-[50px] gap-[2%] relative"
+          className="p-[1rem] flex w-fit mx-[20px] md:mx-[50px] gap-[2%] relative"
           ref={featuredWrapper}
         >
           {/* Image 1 */}
@@ -94,15 +97,19 @@ const Featured = () => {
             onMouseLeave={(e) => handleHover(0)}
             className="featured-item relative w-[33%]"
           >
-            <img src={f1} alt="" className="w-full object-cover h-[600px]" />
+            <img
+              src={f1}
+              alt=""
+              className="w-full object-cover h-[300px] md:h-[600px]"
+            />
             <div
               className={
                 hover == 1
-                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
-                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  ? "absolute bottom-0 w-full h-full text-[15px] md:text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[40px] md:h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
               }
             >
-              <p className="text-white font-semibold flex items-center gap-2">
+              <p className="text-white text-[12px] md:text-[20px] font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>
@@ -115,16 +122,20 @@ const Featured = () => {
             to="/shop"
             className="featured-item relative w-[33%]"
           >
-            <img src={f2} alt="" className="w-full object-cover h-[600px]" />
+            <img
+              src={f2}
+              alt=""
+              className="w-full object-cover h-[300px] md:h-[600px]"
+            />
             <div
               className={
                 hover == 2
-                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
-                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  ? "absolute bottom-0 w-full h-full text-[15px] md:text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[40px] md:h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
               }
             >
               {" "}
-              <p className="text-white font-semibold flex items-center gap-2">
+              <p className="text-white text-[12px] md:text-[20px] font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>
@@ -137,16 +148,20 @@ const Featured = () => {
             to="/shop"
             className="featured-item relative w-[33%]"
           >
-            <img src={f3} alt="" className="w-full object-cover h-[600px]" />
+            <img
+              src={f3}
+              alt=""
+              className="w-full object-cover h-[300px] md:h-[600px]"
+            />
             <div
               className={
                 hover == 3
-                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out  bg-black/40 flex items-center justify-center"
-                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  ? "absolute bottom-0 w-full h-full text-[15px] md:text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[40px] md:h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
               }
             >
               {" "}
-              <p className="text-white font-semibold flex items-center gap-2">
+              <p className="text-white text-[12px] md:text-[20px] font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>
@@ -157,16 +172,20 @@ const Featured = () => {
             to="/shop"
             className="featured-item relative w-[33%]"
           >
-            <img src={f4} alt="" className="w-full object-cover h-[600px]" />
+            <img
+              src={f4}
+              alt=""
+              className="w-full object-cover h-[300px] md:h-[600px]"
+            />
             <div
               className={
                 hover == 4
-                  ? "absolute bottom-0 w-full h-full text-[28px] duration-300 ease-in-out  bg-black/40 flex items-center justify-center"
-                  : "absolute bottom-0 w-full h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  ? "absolute bottom-0 w-full h-full text-[15px] md:text-[28px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
+                  : "absolute bottom-0 w-full h-[40px] md:h-[80px] duration-300 ease-in-out bg-black/40 flex items-center justify-center"
               }
             >
               {" "}
-              <p className="text-white font-semibold flex items-center gap-2">
+              <p className="text-white text-[12px] md:text-[20px] font-semibold flex items-center gap-2">
                 Shop <FaArrowUp />
               </p>
             </div>

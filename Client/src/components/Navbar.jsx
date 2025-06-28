@@ -43,80 +43,72 @@ const Navbar = () => {
   };
 
   return (
-    <div className="top-0 fixed z-[9]">
-      <div className="relative  h-[50px] bg-white text-black text-[17px] font-semibold flex items-center justify-center">
+    <div className="top-0 fixed z-[9] w-screen">
+      {/* Banner */}
+      <div className="relative h-[20px] xl:h-[50px] bg-white text-black text-[8px] xl:text-[17px] font-semibold flex items-center justify-center">
         <h3>Order Now Free Shipping!</h3>
       </div>
+
+      {/* Navbar */}
       <div
-        className={
-          "w-screen text-white  h-[150px] flex justify-between items-center transition-all duration-500 bg-black"
-        }
+        className={`px-[20px] text-white h-[70px] lg:h-[150px] flex items-center duration-500 bg-black`}
       >
-        <div className="w-full mx-[30px] h-[100px] flex justify-between items-center">
+        <div className="flex justify-between items-center w-full mx-[1px] lg:mx-[50px]">
           {/* Left Nav */}
-          <div className="flex gap-5 w-[350px]">
+          <div className="flex gap-5">
             <Link to="/">
-              <button className="w-[100px] text-[20px] h-[70px] font-semibold">
-                Home
-              </button>
+              <h1 className="text-[12px] lg:text-[20px] font-semibold">Home</h1>
             </Link>
             <Link to="/shop">
-              <button className="w-[100px] text-[20px] h-[70px] font-semibold">
-                Shop
-              </button>
+              <h1 className="text-[12px] lg:text-[20px] font-semibold">Shop</h1>
             </Link>
-            {/* <Link>
-            <button className="w-[100px] text-[20px] h-[70px]">About Us</button>
-            </Link> */}
           </div>
 
           {/* Center Logo */}
-          <div className="text-center w-[350px]">
-            <div className="flex justify-center items-center">
-              <img
-                src={logo}
-                alt="Logo"
-                className="w-[150px] h-[150px] object-cover"
-              />
-            </div>
+          <div className="flex justify-center items-center w-[120px]">
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-[80px] lg:w-[150px] object-cover"
+            />
           </div>
 
           {/* Right Nav */}
-          <div className="flex gap-7 w-[350px] items-center justify-end pr-[50px]">
-            {/* Cart visible to all users */}
+          <div className="flex gap-5 lg:gap-7 items-center">
+            {/* Cart */}
             <FaShoppingCart
-              size={20}
               onClick={handleClick}
-              className="cursor-pointer"
+              className="cursor-pointer w-[14px] h-[14px] lg:w-[25px] lg:h-[25px]"
             />
 
-            {/* Show admin link if admin */}
+            {/* Admin Panel */}
             {role === "admin" && (
               <Link to="/admin">
                 <button className="text-[16px]">Admin Panel</button>
               </Link>
             )}
 
-            {/* Show profile if user */}
+            {/* User Profile */}
             {role === "user" && (
               <Link to="/profile">
-                <FaUser size={20} className="cursor-pointer" />
+                <FaUser className="cursor-pointer w-[14px] h-[14px] lg:w-[25px] lg:h-[25px]" />
               </Link>
             )}
 
-            {/* Show Login/Logout based on auth */}
+            {/* Login or Logout */}
             {!role ? (
               <Link to="/login">
-                <FaUser size={20} />
+                <FaUser className="cursor-pointer w-[14px] h-[14px] lg:w-[25px] lg:h-[25px]" />
               </Link>
             ) : (
-              <button onClick={logout} className=" text-[16px]">
+              <button onClick={logout} className="text-[16px]">
                 Logout
               </button>
             )}
           </div>
-          <Cart isVisible={isVisible} setVisibility={setVisibility} />
         </div>
+        {/* Cart Modal */}
+        <Cart isVisible={isVisible} setVisibility={setVisibility} />
       </div>
     </div>
   );

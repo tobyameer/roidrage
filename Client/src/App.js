@@ -10,7 +10,6 @@ import Admin from "./pages/admin/Admin";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminCategories from "./pages/admin/AdminCategories";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 
 function App() {
   return (
