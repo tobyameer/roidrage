@@ -21,7 +21,7 @@ const JoinUs = () => {
             Be the first to hear about new products, transformations, and
             exclusive offers.
           </p>
-          <div className="flex justify-center w-full px-[30%]">
+          <div className="text-[10px] flex justify-center w-full px-[30%]">
             <input
               type="email"
               placeholder="Enter your email"
